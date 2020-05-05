@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW" xmlns="https://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="mobile-web-app-capable" content="yes">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<link rel='stylesheet prefetch' href='style.css?ver=1'>
+</head>
+<body>
+<div class="container">
+	<div class="row">
+		<div class="col-12">
+			<div id="chat_frame">
+				<div class="content">
+					<div class="contact-profile">
+						<img src="//www.gravatar.com/avatar/98d0a24074949185147845293651e72c" alt="" />
+						<p>Max Su</p>
+					</div>
+					<div class="messages">
+						<ul>
+							<li class="sent">
+								<img src="//www.gravatar.com/avatar/21aecea6ba9d8e5949f5d48575369b68" alt="" />
+								<p>怎麼了？有事找我？</p>
+							</li>
+							<li class="replied">
+								<img src="//www.gravatar.com/avatar/98d0a24074949185147845293651e72c" alt="" />
+								<p>說好的雞排呢？說好的雞排呢？說好的雞排呢？說好的雞排呢？說好的雞排呢？說好的雞排呢？說好的雞排呢？說好的雞排呢？說好的雞排呢？說好的雞排呢？說好的雞排呢？說好的雞排呢？</p>
+							</li>
+							<li class="replied">
+								<img src="//www.gravatar.com/avatar/98d0a24074949185147845293651e72c" alt="" />
+								<p>我好餓 ...</p>
+							</li>
+							<li class="sent">
+								<img src="//www.gravatar.com/avatar/21aecea6ba9d8e5949f5d48575369b68" alt="" />
+								<p>哦，我忘記買了! </p>
+							</li>
+							<li class="replied">
+								<img src="//www.gravatar.com/avatar/98d0a24074949185147845293651e72c" alt="" />
+								<p>可惡.....</p>
+							</li>
+						</ul>
+					</div>
+					<div class="message-input">
+						<div class="wrap d-flex">
+							<input class="w-100" type="text" placeholder="寫下您的訊息..." />
+							<button class="submit">Send</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+"use strict";
+(function($) {
+
+	// sender talk
+	let post_msg = function() {
+		let message = $(".message-input input").val();
+		if($.trim(message) == '') {
+			return false;
+		}
+		// append sender message
+		$('<li class="sent"><img src="//www.gravatar.com/avatar/21aecea6ba9d8e5949f5d48575369b68" alt="" /><p>' + message + '</p></li>').appendTo($('.messages ul'));
+		$('#chat_frame .message-input input').val(null);
+
+		// scroll to bottom
+		$('#chat_frame .messages').animate({ scrollTop: $(document).height() }, 'fast');
+	};
+
+	$(function(){
+		// scroll to bottom
+		$('#chat_frame .messages').animate({ scrollTop: $(document).height() }, 'fast');
+		$(document).click('#chat_frame .submit', function(e) {
+			post_msg();
+		});
+	})
+
+	$(window).on('keydown', function(e) {
+		if (e.which == 13) {
+			post_msg();
+			return false;
+		}
+	});
+
+})(jQuery);
+
+</script>
+</body></html>
